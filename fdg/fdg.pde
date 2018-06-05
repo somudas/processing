@@ -28,10 +28,10 @@ for(float i=0;i<ex;i++){
 }
 void circle(float r){
   float max=map(r,50,350,random(PI),TWO_PI);
-  for(float a=0;a<max;a+=0.2){
+  for(float a=random(PI);a<max;a+=0.2){
     pushMatrix();
     rotate(a);
-    translate(0,50);
+    translate(0,20);
     //rotate(-a);
     gradient(color(66,134,255),r);
     popMatrix();
@@ -41,7 +41,7 @@ float np=100;
 void draw(){
 
   float am=amp.analyze()*10000;
-  println(am);
+  
   background(0);
   noStroke();
   translate(300,300);
