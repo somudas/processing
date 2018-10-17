@@ -1,46 +1,40 @@
 import peasy.*;
+
 PeasyCam cam;
+
 void setup(){
   size(600,600,P3D);
-  //noLoop();
+  background(0);
   cam=new PeasyCam(this,500);
 }
-float r=150;
-float k=0.01;
-float r1=0.005,r2=0.5;
-float dr=0.0005;
+float da=0;
 void draw(){
-  background(0,0,0);
-  //pointLight(25,5,55,0,300,-100);
-  stroke(66,134,244);
-  noFill();
-  strokeWeight(2);
-  //translate(300,300);
-  for(float i=0;i<PI;i+=r1){
-    for(float j=0;j<TWO_PI;j+=r2){
-      float x=cos(j)*r;
-      float y=sin(j)*r;
-      float x1=cos(j)*(r+0.1);
-      float y1=sin(j)*(r+0.1);
+  background(0);
+  
+ // translate(300,300);
+  stroke(255);
+  float r=50,lim=150;
+  //directionalLight(255,155,55,0,1,1);
+  //noStroke();
+  fill(255);
+  
+  for(float the=0;the<PI;the+=0.1){
+    for(float omg=0;omg<2*PI;omg+=0.1){
+      float x=r*sin(the)*cos(omg);
+      float y=r*sin(the)*sin(omg);
+      float z=r*cos(the);
       
-      //if(random(2)>1.5){
+      r=map(noise(x,y,z),0,1,0,lim);
+      
+      x=r*sin(the)*cos(omg);
+      y=r*sin(the)*sin(omg);
+      z=r*cos(the);
       pushMatrix();
-      translate(x,y);
-      box(1);
+      translate(x,y,z);
+      point(0,0,0);
       popMatrix();
-      //line(x,y,x1,y1);
-    //}
+      //point(x,y,z);
     }
-    rotateY(i);
   }
-  r1+=dr;
-  if(r1>0.05){
-    dr=-dr;
-  }
-  if(r1<0.005){
-    dr=-dr;
-  }
-  
-  r2=r1/k;
-  
+  da+=0.000001;
 }
